@@ -1,13 +1,25 @@
-"use client"
+"use client";
 
-
-import Image from "next/image"
-import Link from "next/link"
-import { Facebook, Linkedin, Youtube, Send, Rss } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
-
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Facebook, Linkedin, Youtube, Send, Rss } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export default function FifthComponent() {
+  // Initialize any window-dependent state
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    // Any window-dependent code here
+  }, []);
+
+  // Don't render until client-side
+  if (!isMounted) {
+    return null;
+  }
+
   const hotStocks = [
     "Suzlon Energy Share Price",
     "Adani Enterprises Share Price",
@@ -20,8 +32,7 @@ export default function FifthComponent() {
     "SBI Share Price",
     "Reliance shares",
     "Stock Market LIVE",
-  ]
-
+  ];
 
   const topSections = [
     [
@@ -35,7 +46,15 @@ export default function FifthComponent() {
       "Technology News",
       "World News",
     ],
-    ["Industry News", "Education News", "Opinion", "Shows", "Economy News", "Lifestyle News", "Health News"],
+    [
+      "Industry News",
+      "Education News",
+      "Opinion",
+      "Shows",
+      "Economy News",
+      "Lifestyle News",
+      "Health News",
+    ],
     [
       "Today's Paper",
       "About Us",
@@ -47,9 +66,15 @@ export default function FifthComponent() {
       "GST registration number List",
       "Compliance",
     ],
-    ["Contact Us", "Advertise with Us", "Sitemap", "Subscribe", "Careers", "BS Apps"],
-  ]
-
+    [
+      "Contact Us",
+      "Advertise with Us",
+      "Sitemap",
+      "Subscribe",
+      "Careers",
+      "BS Apps",
+    ],
+  ];
 
   const keyEvents = [
     "Stock Companies List",
@@ -62,19 +87,17 @@ export default function FifthComponent() {
     "Free Sudoku Puzzle",
     "Free Crossword Puzzle",
     "Income Tax Calculator 2025-26",
-  ]
-
+  ];
 
   const socialLinks = [
     { icon: <Facebook className="h-4 w-4" />, href: "#", bg: "bg-[#3b5998]" },
     { icon: "WhatsApp", href: "#", bg: "bg-[#25D366]" }, // Custom WhatsApp icon needed
-    { icon: "X", href: "#", bg: "bg-black"  }, // Custom X/Twitter icon needed
+    { icon: "X", href: "#", bg: "bg-black" }, // Custom X/Twitter icon needed
     { icon: <Linkedin className="h-4 w-4" />, href: "#", bg: "bg-[#0077b5]" },
     { icon: <Youtube className="h-4 w-4" />, href: "#", bg: "bg-[#ff0000]" },
     { icon: <Send className="h-4 w-4" />, href: "#", bg: "bg-[#0088cc]" },
     { icon: <Rss className="h-4 w-4" />, href: "#", bg: "bg-[#f26522]" },
-  ]
-
+  ];
 
   return (
     <footer className="bg-gray-50 pt-8 pb-4">
@@ -90,7 +113,6 @@ export default function FifthComponent() {
           />
         </div>
 
-
         {/* Hot Stocks */}
         <div className="mb-8">
           <h2 className="text-sm font-bold mb-4">HOT STOCKS</h2>
@@ -100,12 +122,13 @@ export default function FifthComponent() {
                 <Link href="#" className="text-sm hover:text-red-600">
                   {stock}
                 </Link>
-                {index < hotStocks.length - 1 && <Separator orientation="vertical" className="mx-2 h-4" />}
+                {index < hotStocks.length - 1 && (
+                  <Separator orientation="vertical" className="mx-2 h-4" />
+                )}
               </span>
             ))}
           </div>
         </div>
-
 
         {/* Top Sections */}
         <div className="mb-8">
@@ -118,14 +141,15 @@ export default function FifthComponent() {
                     <Link href="#" className="text-sm hover:text-red-600">
                       {section}
                     </Link>
-                    {index < row.length - 1 && <Separator orientation="vertical" className="mx-2 h-4" />}
+                    {index < row.length - 1 && (
+                      <Separator orientation="vertical" className="mx-2 h-4" />
+                    )}
                   </span>
                 ))}
               </div>
             ))}
           </div>
         </div>
-
 
         {/* Key Events */}
         <div className="mb-8">
@@ -136,16 +160,19 @@ export default function FifthComponent() {
                 <Link href="#" className="text-sm hover:text-red-600">
                   {event}
                 </Link>
-                {index < keyEvents.length - 1 && <Separator orientation="vertical" className="mx-2 h-4" />}
+                {index < keyEvents.length - 1 && (
+                  <Separator orientation="vertical" className="mx-2 h-4" />
+                )}
               </span>
             ))}
           </div>
         </div>
 
-
         {/* Copyright and Social */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t">
-          <p className="text-sm text-gray-600">Copyrights © 2025 Business Standard Private Ltd. All rights reserved</p>
+          <p className="text-sm text-gray-600">
+            Copyrights © 2025 Business Standard Private Ltd. All rights reserved
+          </p>
           <div className="flex items-center gap-3">
             {socialLinks.map((social, index) => (
               <Link
@@ -160,10 +187,5 @@ export default function FifthComponent() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
-
-
-
-
